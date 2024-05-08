@@ -2,27 +2,34 @@ import { useState , useContext} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { authService } from "../services/authService";
 import Footer from "../components/Footer";
+import { Spinner } from "flowbite-react";
 
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
+    const [loading,setLoading] = useState(false)
+
 
     const navigate = useNavigate();
     const handleLogin = async (e) => {
         e.preventDefault();
+        setLoading(true)
+
         try{
             const userData = { username,password};
             const response = await authService.loginUser(userData);
 
             //console.log(response?.data)
             if(response.status === 200 ){
+                setLoading(false)
                 authService.setToken(response?.data?.access);
                 navigate('/home')
             }
             setError(null);
         
         } catch (error) {
+            setLoading(false)
             console.error('Login failed', error.response);
             setError('Invalid username or password!');
         }
@@ -69,7 +76,7 @@ const Login = () => {
                                         {error}
                                     </div>
                             )}
-                            <button onClick={handleLogin} className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign in</button>
+                            <button onClick={handleLogin} className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">{loading ? (<Spinner className="mr-2" size='md'/>):(<h1></h1>)}Sign in</button>
                             <p className="text-sm font-light text-gray-800 dark:text-gray-400">
                                 Don’t have an account yet? <Link to="/" smooth duration={500} className="font-medium text-cyan-400 hover:underline dark:text-primary-500">Sign up</Link>
                             </p>
