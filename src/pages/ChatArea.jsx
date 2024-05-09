@@ -81,13 +81,13 @@ const Chat = () => {
   const sendMessage = async () =>{
     if (!newMessage.trim()) return;
 
+    socket.current.send(JSON.stringify({ 'message':newMessage , 'sender':userId , 'receiver' :sender }))
+
     const messageData = {
       sender : userId,
       receiver : sender,
       content : newMessage
     }
-
-    socket.current.send(JSON.stringify({ 'message':newMessage , 'sender':userId , 'receiver' :sender }))
 
     const response = await client.post(`chat/send-message/${userId}/${sender}/`,messageData)
     setNewMessage('')
