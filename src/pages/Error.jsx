@@ -19,6 +19,12 @@ export default function ErrorPage() {
                                 (<Link to='/' className="inline-flex text-white bg-rose-600 hover:bg-rose-500 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-rose-500 my-4" >Back To Home</Link>)}
                             </div>   
                   </div>
+        <div className="grid grid-cols-5">
+        <h1 className="font-sans text-rose-400 text-2xl">First font</h1>
+        <h1 className="font-body text-rose-500 text-2xl">Second font</h1>
+        <h1 className="font-Roboto text-rose-600 text-2xl">Third font</h1>
+        <h1 className="font-Arial text-rose-700 text-2xl">Fourth font</h1>
+        <h1 className="font-sans text-rose-800 text-2xl">Fifth font</h1>
       </section>
   );
 }
