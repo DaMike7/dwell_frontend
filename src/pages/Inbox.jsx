@@ -6,6 +6,7 @@ import { useState , useEffect} from "react";
 import client from "../api";
 import Header from "../components/Header";
 import { Avatar } from "flowbite-react";
+import { Spinner } from "flowbite-react";
 
 
 const Inbox = () => {
@@ -14,6 +15,7 @@ const Inbox = () => {
     const [data, setData] = useState([]);
     const [username,setUsername] = useState('')
     const [pictures, setPictures] = useState({});
+    const [loading,setLoading] = useState(false)
   
     useEffect(() => {
       const userId = authService.getUserId();
