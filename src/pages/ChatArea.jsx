@@ -143,7 +143,7 @@ const Chat = () => {
           )}
         </div>
 
-        <div className="my-2" id="send-section"></div>
+        <div className="my-2.5" id="send-section"></div>
 
         {/**SEND BUTTON */}
         <div  className="p-2 mt-auto bg-white border-t-2 border-gray-200">
