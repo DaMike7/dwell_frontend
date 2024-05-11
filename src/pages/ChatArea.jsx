@@ -32,10 +32,9 @@ const Chat = () => {
 
     getSender()
 
-    const element = document.getElementById('messages');
-    if (element) {
-      element.scrollTop = element.scrollHeight;
-    }
+    const scrollToBottom = () => {
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
  
     socket.current.onmessage = (event) => {
       setMessages(prevMessages => [...prevMessages, JSON.parse(event.data)]);
@@ -48,7 +47,7 @@ const Chat = () => {
       }
     }
 
-  }, [sender, authService,element]);
+  }, [sender, authService]);
 
   const getSender = async () => {
     let picture;
@@ -106,8 +105,8 @@ const Chat = () => {
       <div className=" flex flex-col h-screen sm:ml-64 bg-gradient-to-r from-slate-300 to-amber-50">
       <nav class="p-1.5 flex bg-gradient-to-r from-cyan-600 to-slate-600">
         <div onClick={() => navigate(`/inbox/${userId}`)} className="text-gray-100 hover:text-gray-700 flex gap-1 bg-inherit hover:bg-gray-100 m-2 p-1.5 rounded-lg"><FaArrowLeft className="text-xl mt-1 font-body "/></div>
-        <div className="ml-0 lg:ml-8 flex text-gray-100">
-          <img className="w-12 h-12 rounded-full mx-4 mr-2" src={picture} alt="profile picture" />
+        <div className="ml-0 lg:ml-4 flex text-gray-100">
+          <img className="w-12 h-12 rounded-full mx-2 mr-2" src={picture} alt="profile picture" />
           <p className="mt-3 text-lg font-semibold">{data.first_name} {data.last_name}</p>
         </div>
       </nav>
