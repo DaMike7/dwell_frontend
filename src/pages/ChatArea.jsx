@@ -31,10 +31,6 @@ const Chat = () => {
     }
 
     getSender()
-
-    const scrollToBottom = () => {
-      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
  
     socket.current.onmessage = (event) => {
       setMessages(prevMessages => [...prevMessages, JSON.parse(event.data)]);
@@ -47,7 +43,13 @@ const Chat = () => {
       }
     }
 
-  }, [sender, authService]);
+    scrollToBottom()
+
+  }, [sender, authService,]);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+};
 
   const getSender = async () => {
     let picture;
