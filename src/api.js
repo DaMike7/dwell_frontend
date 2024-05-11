@@ -5,7 +5,7 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true
 
 const client = axios.create({
-  baseURL: `${process.env.BACKEND_URL}`
+  baseURL: 'https://dwellhomes.vercel.app'
 });
 
 
