@@ -31,6 +31,7 @@ const Chat = () => {
     }
 
     getSender()
+    scroll()
  
     socket.current.onmessage = (event) => {
       setMessages(prevMessages => [...prevMessages, JSON.parse(event.data)]);
@@ -43,11 +44,9 @@ const Chat = () => {
       }
     }
 
-    scrollToBottom()
-
   }, [sender, authService,]);
 
-  const scrollToBottom = () => {
+  const scroll = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
 };
 
