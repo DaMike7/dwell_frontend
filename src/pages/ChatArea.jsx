@@ -124,7 +124,7 @@ const Chat = () => {
                     className={`flex ${msg.sender === userId ? 'justify-end' : 'justify-start'}`}
                   >
                     <div
-                      className={`${msg.sender === userId ? 'font-sans bg-gradient-to-r from-cyan-600 to-slate-700 text-gray-100 p-2 rounded-lg max-w-xs md:max-w-md':'bg-gradient-to-r from-teal-400 to-yellow-200 text-gray-900 p-2.5 rounded-lg max-w-xs font-sans md:max-w-md'}` }
+                      className={`${msg.sender === userId ? 'font-sans bg-gradient-to-r from-cyan-600 to-slate-700 text-gray-100 p-2 rounded-lg max-w-xs md:max-w-md':'bg-gradient-to-r from-teal-100 to-cyan-50 text-gray-900 p-2.5 rounded-lg max-w-xs font-sans md:max-w-md'}` }
                     >
                       <p>{msg.content || msg.message}</p>
                       {/*<p className="text-xs text-gray-600 mt-1">{new Date(msg.timestamp).toLocaleString()}</p>*/}
