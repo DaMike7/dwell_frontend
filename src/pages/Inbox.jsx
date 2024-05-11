@@ -6,7 +6,6 @@ import { useState , useEffect} from "react";
 import client from "../api";
 import Header from "../components/Header";
 import { Avatar } from "flowbite-react";
-import { Spinner } from "flowbite-react";
 
 
 const Inbox = () => {
@@ -16,6 +15,7 @@ const Inbox = () => {
     const [username,setUsername] = useState('')
     const [pictures, setPictures] = useState({});
     const [loading,setLoading] = useState(false)
+    const [error,setError] = useState(false)
   
     useEffect(() => {
       const userId = authService.getUserId();
@@ -31,14 +31,19 @@ const Inbox = () => {
     }, [userId]);
   
     const fetchUserMessages = async () => {
+      setLoading(true)
       try {
         const response = await client.get(`chat/inbox/${userId}/`);
         setData(response.data);
+        setLoading(false)
+        setError(false)
   
         const uniqueSenders = [...new Set(response.data.map((message) => message.sender))];
         uniqueSenders.forEach(fetchProfilePicture);
   
       } catch (error) {
+        setLoading(false)
+        setError(true)
         console.error("Error fetching messages:", error.response);
       }
     };
@@ -87,8 +92,76 @@ const Inbox = () => {
         <div >
         <Header/>
             <div>
-                {data.length > 0  ? (
-                    <div className="mt-16">
+                {loading ? (<div className="flex flex-col space-y-4 p-4 max-w-md mx-auto">
+                  <div class="animate-pulse flex space-x-4">
+                    <div class="rounded-full bg-gray-300 h-10 w-10"></div>
+                    <div class="flex-1 space-y-2 py-1">
+                        <div class="h-2 bg-gray-300 rounded"></div>
+                        <div class="space-y-1">
+                            <div class="h-2 bg-gray-300 rounded w-5/6"></div>
+                            <div class="h-2 bg-gray-300 rounded w-4/6"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="animate-pulse flex space-x-4">
+                    <div class="rounded-full bg-gray-300 h-10 w-10"></div>
+                    <div class="flex-1 space-y-2 py-1">
+                        <div class="h-2 bg-gray-300 rounded"></div>
+                        <div class="space-y-1">
+                            <div class="h-2 bg-gray-300 rounded w-5/6"></div>
+                            <div class="h-2 bg-gray-300 rounded w-1/2"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="animate-pulse flex space-x-4">
+                    <div class="rounded-full bg-gray-300 h-10 w-10"></div>
+                    <div class="flex-1 space-y-2 py-1">
+                        <div class="h-2 bg-gray-300 rounded"></div>
+                        <div class="space-y-1">
+                            <div class="h-2 bg-gray-300 rounded w-5/6"></div>
+                            <div class="h-2 bg-gray-300 rounded w-1/2"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="animate-pulse flex space-x-4">
+                    <div class="rounded-full bg-gray-300 h-10 w-10"></div>
+                    <div class="flex-1 space-y-2 py-1">
+                        <div class="h-2 bg-gray-300 rounded"></div>
+                        <div class="space-y-1">
+                            <div class="h-2 bg-gray-300 rounded w-5/6"></div>
+                            <div class="h-2 bg-gray-300 rounded w-1/2"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="animate-pulse flex space-x-4">
+                    <div class="rounded-full bg-gray-300 h-10 w-10"></div>
+                    <div class="flex-1 space-y-2 py-1">
+                        <div class="h-2 bg-gray-300 rounded"></div>
+                        <div class="space-y-1">
+                            <div class="h-2 bg-gray-300 rounded w-5/6"></div>
+                            <div class="h-2 bg-gray-300 rounded w-1/2"></div>
+                        </div>
+                    </div>
+                </div>
+                </div>): error ? (
+                    <section class=" mt-28 flex flex-col min-h-screen bg-gradient-to-r from-gray-200 to-cyan-50">
+                        <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+                            <div class="mx-auto max-w-screen-sm text-center">
+                                <h1 class="mb-4 text-7xl tracking-tight font-extrabold lg:text-9xl text-slate-700 dark:text-primary-500">Oops!</h1>
+                                <p class="mb-4 text-3xl tracking-tight font-bold text-gray-900 md:text-4xl dark:text-white">Something's missing.</p>
+                                <p class="mb-4 text-lg font-light text-gray-900 dark:text-gray-400">Sorry, you don't have any message in your inbox. </p>
+                                <Link to='/home' class="inline-flex text-white bg-rose-600 hover:bg-rose-500 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-rose-500 my-4">Back to Homepage</Link>
+                            </div>   
+                        </div>
+                    </section>
+                ):(
+                <div>
+                  {/**DATA */}
+                  <div className="mt-16">
                     <ul>
                     {getLatestMessages().map((latestMessage) => (
                             <li >
@@ -107,17 +180,7 @@ const Inbox = () => {
                         ))}
                     </ul>
                 </div>
-                ) : (
-                    <section class=" mt-28 flex flex-col min-h-screen bg-gradient-to-r from-gray-200 to-cyan-50">
-                        <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
-                            <div class="mx-auto max-w-screen-sm text-center">
-                                <h1 class="mb-4 text-7xl tracking-tight font-extrabold lg:text-9xl text-slate-700 dark:text-primary-500">Oops!</h1>
-                                <p class="mb-4 text-3xl tracking-tight font-bold text-gray-900 md:text-4xl dark:text-white">Something's missing.</p>
-                                <p class="mb-4 text-lg font-light text-gray-900 dark:text-gray-400">Sorry, you don't have any message in your inbox. </p>
-                                <Link to='/home' class="inline-flex text-white bg-rose-600 hover:bg-rose-500 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-rose-500 my-4">Back to Homepage</Link>
-                            </div>   
-                        </div>
-                    </section>
+                </div>
                 )}
             </div>
         </div>
