@@ -47,7 +47,10 @@ const Chat = () => {
   }, [sender, authService,]);
 
   const scroll = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    const messageList = document.getElementById('messages');
+    if (messageList) {
+      messageList.scrollTop = messageList.scrollHeight;
+    }
 };
 
   const getSender = async () => {
