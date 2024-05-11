@@ -5,7 +5,8 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true
 
 const client = axios.create({
-  baseURL : `${import.meta.env.BACKEND_URL}`
+  baseURL: `${process.env.BACKEND_URL}`
 });
+
 
 export default client;
