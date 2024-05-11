@@ -66,7 +66,6 @@ const Inbox = () => {
             console.error('Both requests failed:', innerError);
           }
         }
-        console.log(profilePicture)
         setPictures((prev) => ({ ...prev, [senderId]: profilePicture })); 
   
       } catch (error) {
