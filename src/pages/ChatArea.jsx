@@ -107,10 +107,10 @@ const Chat = () => {
     <>
       <SideNav />
       <div className=" flex flex-col h-screen sm:ml-64 bg-gradient-to-r from-slate-300 to-amber-50">
-      <nav class="p-1.5 flex bg-gradient-to-r from-cyan-600 to-slate-600">
-        <div onClick={() => navigate(`/inbox/${userId}`)} className="text-gray-100 hover:text-gray-700 flex gap-1 bg-inherit hover:bg-gray-100 m-2 p-1.5 rounded-lg"><FaArrowLeft className="text-xl mt-1 font-body "/></div>
+      <nav class="font-sans p-1.5 flex bg-gradient-to-r from-cyan-600 to-slate-600">
+        <div onClick={() => navigate(`/inbox/${userId}`)} className="text-gray-100 hover:text-gray-700 flex gap-1 bg-inherit hover:bg-gray-100 m-2 p-1.5 rounded-lg"><FaArrowLeft className="text-xl mt-1 font-sans "/></div>
         <div className="ml-0 lg:ml-4 flex text-gray-100">
-          <img className="w-12 h-12 rounded-full mx-2 mr-2" src={picture} alt="profile picture" />
+          <img className="w-12 h-12 rounded-full mr-2" src={picture} alt="profile picture" />
           <p className="mt-3 text-lg font-semibold">{data.first_name} {data.last_name}</p>
         </div>
       </nav>
@@ -124,7 +124,7 @@ const Chat = () => {
                     className={`flex ${msg.sender === userId ? 'justify-end' : 'justify-start'}`}
                   >
                     <div
-                      className={`${msg.sender === userId ? 'bg-gradient-to-r from-cyan-600 to-slate-700 text-gray-100 p-2 rounded-lg max-w-xs md:max-w-md':'bg-gradient-to-r from-teal-400 to-yellow-200 text-gray-900 p-2.5 rounded-lg max-w-xs md:max-w-md'}` }
+                      className={`${msg.sender === userId ? 'font-sans bg-gradient-to-r from-cyan-600 to-slate-700 text-gray-100 p-2 rounded-lg max-w-xs md:max-w-md':'bg-gradient-to-r from-teal-400 to-yellow-200 text-gray-900 p-2.5 rounded-lg max-w-xs font-sans md:max-w-md'}` }
                     >
                       <p>{msg.content || msg.message}</p>
                       {/*<p className="text-xs text-gray-600 mt-1">{new Date(msg.timestamp).toLocaleString()}</p>*/}
