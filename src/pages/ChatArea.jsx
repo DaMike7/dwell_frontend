@@ -25,7 +25,7 @@ const Chat = () => {
     setUserId(userId)
 
     fetchChatMessages(userId, sender);
-    socket.current = new WebSocket(`ws://dwellbackend.vercel.app/ws/chat/${sender}/?token=${token}`)
+    socket.current = new WebSocket(`wss://dwellbackend.vercel.app/ws/chat/${sender}/?token=${token}`)
     socket.current.onopen = () =>{
       console.log('connected')
     }
