@@ -107,7 +107,7 @@ const Chat = () => {
     <>
       <SideNav />
       <div className=" flex flex-col h-screen sm:ml-64 bg-gradient-to-r from-slate-300 to-amber-50">
-      <nav class="fixed font-sans p-1.5 flex bg-gradient-to-r from-cyan-600 to-slate-600">
+      <nav class="font-sans p-1.5 flex bg-gradient-to-r from-cyan-600 to-slate-600">
         <div onClick={() => navigate(`/inbox/${userId}`)} className="text-gray-100 hover:text-gray-700 flex gap-1 bg-inherit hover:bg-gray-100 m-2 p-1.5 rounded-lg"><FaArrowLeft className="text-xl mt-1 font-sans "/></div>
         <div className="ml-0 lg:ml-4 flex text-gray-100">
           <img className="w-12 h-12 rounded-full mr-2" src={picture} alt="profile picture" />
@@ -149,7 +149,7 @@ const Chat = () => {
         <div className="my-2" id="send-section"></div>
 
         {/**SEND SECTION */}
-        <div  className="fixed p-2 mt-auto bg-white border-t-2 border-gray-200">
+        <div  className="p-2 mt-auto bg-white border-t-2 border-gray-200">
           <div className="flex gap-2">
             <input
               value={newMessage}
